@@ -13,6 +13,7 @@ Simple mechanism to use in card games. Allows enabling / disabling / configuring
   - zoom multiplier
   - fixed y position on zoom
   - ui layer sorting
+  - bring zoomed card to front
   - reset card rotation on zoom
 - individually control several animation speeds
 - configure a play area where cards need to be dropped to be played
@@ -20,7 +21,7 @@ Simple mechanism to use in card games. Allows enabling / disabling / configuring
 - UnityEvent when card is played
 
 ## Video
-Here's a vid of the project in action: {TODO: add vid link}
+Here's a vid of the project in action: https://www.youtube.com/watch?v=o2e7uh4VDXA
 
 ## License
 MIT License
