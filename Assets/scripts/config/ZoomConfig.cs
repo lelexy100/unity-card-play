@@ -21,6 +21,9 @@ namespace config {
         [SerializeField]
         public int defaultSortOrder;
         
+        [SerializeField]
+        public bool bringToFrontOnHover;
+        
         [Tooltip("This is the sorting order of the card when it is zoomed in.")]
         [SerializeField]
         public int zoomedSortOrder;

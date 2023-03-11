@@ -67,7 +67,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     private void UpdateScale() {
-        var targetZoom = isDragged || isHovered ? zoomConfig.multiplier : 1;
+        var targetZoom = (isDragged || isHovered) && zoomConfig.zoomOnHover ? zoomConfig.multiplier : 1;
         var delta = Mathf.Abs(rectTransform.localScale.x - targetZoom);
         var newZoom = Mathf.Lerp(rectTransform.localScale.x, targetZoom,
             animationSpeedConfig.zoom / delta * Time.deltaTime);
@@ -105,7 +105,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if (zoomConfig.zoomOnHover && zoomConfig.multiplier > 1) {
+        if (zoomConfig.bringToFrontOnHover) {
             canvas.sortingOrder = zoomConfig.zoomedSortOrder;
         }
 
