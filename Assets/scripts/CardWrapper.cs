@@ -1,4 +1,5 @@
 using config;
+using events;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -21,6 +22,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private bool isHovered;
     private bool isDragged;
     private Vector2 dragStartPos;
+    public EventsConfig eventsConfig;
 
     public float width {
         get => rectTransform.rect.width * rectTransform.localScale.x;
@@ -53,6 +55,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             if (isHovered && zoomConfig.overrideYPosition != -1) {
                 target = new Vector2(target.x, zoomConfig.overrideYPosition);
             }
+
             var distance = Vector2.Distance(rectTransform.position, target);
             var repositionSpeed = rectTransform.position.y > target.y || rectTransform.position.y < 0
                 ? animationSpeedConfig.releasePosition
@@ -109,12 +112,14 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             canvas.sortingOrder = zoomConfig.zoomedSortOrder;
         }
 
+        eventsConfig?.OnCardHover?.Invoke(new CardHover(this));
         isHovered = true;
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         canvas.sortingOrder = uiLayer;
         isHovered = false;
+        eventsConfig?.OnCardUnhover?.Invoke(new CardUnhover(this));
     }
 
     public void OnPointerDown(PointerEventData eventData) {
@@ -122,6 +127,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         dragStartPos = new Vector2(transform.position.x - eventData.position.x,
             transform.position.y - eventData.position.y);
         container.OnCardDragStart(this);
+        eventsConfig?.OnCardUnhover?.Invoke(new CardUnhover(this));
     }
 
     public void OnPointerUp(PointerEventData eventData) {

@@ -39,7 +39,7 @@ public class CardContainer : MonoBehaviour {
     
     [Header("Events")]
     [SerializeField]
-    private UnityEvent<CardPlayed> onCardPlayed;
+    private EventsConfig eventsConfig;
     
     private List<CardWrapper> cards = new();
 
@@ -97,6 +97,7 @@ public class CardContainer : MonoBehaviour {
             // Pass child card any extra config it should be aware of
             wrapper.zoomConfig = zoomConfig;
             wrapper.animationSpeedConfig = animationSpeedConfig;
+            wrapper.eventsConfig = eventsConfig;
             wrapper.container = this;
         }
     }
@@ -216,7 +217,7 @@ public class CardContainer : MonoBehaviour {
     public void OnCardDragEnd() {
         // If card is in play area, play it!
         if (IsCursorInPlayArea()) {
-            onCardPlayed.Invoke(new CardPlayed(currentDraggedCard));
+            eventsConfig?.OnCardPlayed?.Invoke(new CardPlayed(currentDraggedCard));
             if (cardPlayConfig.destroyOnPlay) {
                 Destroy(currentDraggedCard.gameObject);
             }
