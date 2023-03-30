@@ -14,5 +14,8 @@ namespace config {
         
         [SerializeField]
         public UnityEvent<CardUnhover> OnCardUnhover;
+        
+        [SerializeField]
+        public UnityEvent<CardDestroy> OnCardDestroy;
     }
 }

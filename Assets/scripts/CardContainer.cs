@@ -219,6 +219,7 @@ public class CardContainer : MonoBehaviour {
         if (IsCursorInPlayArea()) {
             eventsConfig?.OnCardPlayed?.Invoke(new CardPlayed(currentDraggedCard));
             if (cardPlayConfig.destroyOnPlay) {
+                eventsConfig?.OnCardDestroy?.Invoke(new CardDestroy(currentDraggedCard));
                 Destroy(currentDraggedCard.gameObject);
             }
         }
