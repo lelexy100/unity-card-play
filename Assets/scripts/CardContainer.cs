@@ -225,6 +225,12 @@ public class CardContainer : MonoBehaviour {
         }
         currentDraggedCard = null;
     }
+    
+    public void DestroyCard(CardWrapper card) {
+        cards.Remove(card);
+        eventsConfig.OnCardDestroy?.Invoke(new CardDestroy(card));
+        Destroy(card.gameObject);
+    }
 
     private bool IsCursorInPlayArea() {
         if (cardPlayConfig.playArea == null) return false;
