@@ -108,6 +108,10 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
+        if (isDragged) {
+            // Avoid hover events while dragging
+            return;
+        }
         if (zoomConfig.bringToFrontOnHover) {
             canvas.sortingOrder = zoomConfig.zoomedSortOrder;
         }
@@ -117,6 +121,10 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     public void OnPointerExit(PointerEventData eventData) {
+        if (isDragged) {
+            // Avoid hover events while dragging
+            return;
+        }
         canvas.sortingOrder = uiLayer;
         isHovered = false;
         eventsConfig?.OnCardUnhover?.Invoke(new CardUnhover(this));

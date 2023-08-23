@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace demo {
     public class CardDestroyer : MonoBehaviour {
+        public CardContainer container;
         public void OnCardDestroyed(CardPlayed evt) {
-            Destroy(evt.card.gameObject);
+            container.DestroyCard(evt.card);
         }
     }
 }

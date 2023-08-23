@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using config;
 using DefaultNamespace;
 using events;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CardContainer : MonoBehaviour {
@@ -219,8 +217,7 @@ public class CardContainer : MonoBehaviour {
         if (IsCursorInPlayArea()) {
             eventsConfig?.OnCardPlayed?.Invoke(new CardPlayed(currentDraggedCard));
             if (cardPlayConfig.destroyOnPlay) {
-                eventsConfig?.OnCardDestroy?.Invoke(new CardDestroy(currentDraggedCard));
-                Destroy(currentDraggedCard.gameObject);
+                DestroyCard(currentDraggedCard);
             }
         }
         currentDraggedCard = null;
