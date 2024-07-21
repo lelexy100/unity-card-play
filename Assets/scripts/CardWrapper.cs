@@ -23,6 +23,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private bool isDragged;
     private Vector2 dragStartPos;
     public EventsConfig eventsConfig;
+    public bool preventCardInteraction;
 
     public float width {
         get => rectTransform.rect.width * rectTransform.localScale.x;
@@ -131,6 +132,7 @@ public class CardWrapper : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     public void OnPointerDown(PointerEventData eventData) {
+        if (preventCardInteraction) return;
         isDragged = true;
         dragStartPos = new Vector2(transform.position.x - eventData.position.x,
             transform.position.y - eventData.position.y);

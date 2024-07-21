@@ -11,6 +11,9 @@ public class CardContainer : MonoBehaviour {
     [SerializeField]
     private bool forceFitContainer;
 
+    [SerializeField]
+    private bool preventCardInteraction;
+
     [Header("Alignment")]
     [SerializeField]
     private CardAlignment alignment = CardAlignment.Center;
@@ -20,7 +23,7 @@ public class CardContainer : MonoBehaviour {
 
     [Header("Rotation")]
     [SerializeField]
-    [Range(0f, 90f)]
+    [Range(-90f, 90f)]
     private float maxCardRotation;
 
     [SerializeField]
@@ -96,6 +99,7 @@ public class CardContainer : MonoBehaviour {
             wrapper.zoomConfig = zoomConfig;
             wrapper.animationSpeedConfig = animationSpeedConfig;
             wrapper.eventsConfig = eventsConfig;
+            wrapper.preventCardInteraction = preventCardInteraction;
             wrapper.container = this;
         }
     }
